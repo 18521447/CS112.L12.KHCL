@@ -31,5 +31,5 @@ python test_tool.py bt1/brute_force.py bt1/tests_input.txt test_output.txt
 2. Các dòng tiếp theo là input của từng test
 3. Cuối file phải chứa đúng 1 kí tự xuống dòng
 ## Format của file test output
-1. Nhập output của từng test (output của mỗi test nằm trên một dòng)
+1. Nhập output của từng test (output của mỗi test có thể nằm trên nhiều dòng)
 2. Cuối file phải chứa đúng 1 kí tự xuống dòng
