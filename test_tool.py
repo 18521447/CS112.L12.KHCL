@@ -22,8 +22,8 @@ if __name__ == '__main__':
         cases.append(case)
 
 
-    command = ["python", sys.argv[1]]
-
+    command = ['python', sys.argv[1]]
+    print('-' * 30)
     process_output = ''
     for i in range(num_test_case):
         process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
@@ -32,5 +32,15 @@ if __name__ == '__main__':
         correct_output = ''
         for j in range(num_line_each_test_output):
             correct_output += output_file.readline()
-        result = 'Pass   ✅' if process_output == correct_output else 'Failed ❌'
-        print("Test #{}: {}".format(i + 1, result))
+        
+        print('TEST {}: '.format(i + 1), end='')
+
+        if process_output == correct_output:
+            print('PASS   ✅\n')
+        else:
+            print('FAILED ❌\n')
+            print('Correct output')
+            print(correct_output)
+            print('Your output')
+            print(process_output)
+        print('-' * 30)
