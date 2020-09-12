@@ -7,12 +7,9 @@ if __name__ == '__main__':
     output_file = open(sys.argv[3])
 
     num_test_case = int(input_file.readline())
-    num_line_each_test_input = input_file.read().count('\n') // num_test_case
-    num_line_each_test_output = output_file.read().count('\n') // num_test_case
+    num_line_each_test_input = int(input_file.readline()) 
+    num_line_each_test_output = int(input_file.readline()) 
 
-    input_file.seek(0)
-    input_file.readline()
-    output_file.seek(0)
 
     cases = []
     for _ in range(num_test_case):
