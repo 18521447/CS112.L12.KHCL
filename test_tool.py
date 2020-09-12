@@ -23,8 +23,10 @@ if __name__ == '__main__':
 
 
     command = ['python', sys.argv[1]]
+
     print('-' * 30)
     process_output = ''
+    
     for i in range(num_test_case):
         process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
         process_output = process.communicate(bytes(cases[i], 'ascii'))[0].decode()
