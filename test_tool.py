@@ -6,8 +6,23 @@ def convert_to_lf(string):
     return string.replace("\r\n", "\n").replace("\r", "\n")
 
 if __name__ == '__main__':
-    input_file = open(sys.argv[2])
-    output_file = open(sys.argv[3])
+    
+    python_file = sys.argv[1]
+    try: 
+        open(sys.argv[1])
+    except FileNotFoundError:
+        print(sys.argv[1] + ' not found')
+        raise
+    try:
+        input_file = open(sys.argv[2])
+    except FileNotFoundError:
+        print(sys.argv[2] + ' not found')
+        raise
+    try:
+        output_file = open(sys.argv[3])
+    except FileNotFoundError:
+        print(sys.argv[3] + ' not found')
+        raise
 
     num_test_case = int(input_file.readline())
     num_line_each_test_input = int(input_file.readline()) 
