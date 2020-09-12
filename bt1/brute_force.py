@@ -17,4 +17,4 @@ for i in range(n):
             max_r = j
 
         
-print('{} {} {}'.format(max_l + 1, max_r + 1, max_global))
+print(max_l + 1, max_r + 1, max_global)

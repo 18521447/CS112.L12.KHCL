@@ -26,7 +26,7 @@ if __name__ == '__main__':
 
     print('-' * 30)
     process_output = ''
-    
+
     for i in range(num_test_case):
         process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
         process_output = process.communicate(bytes(cases[i], 'ascii'))[0].decode()
@@ -38,9 +38,9 @@ if __name__ == '__main__':
         print('TEST {}: '.format(i + 1), end='')
 
         if process_output == correct_output:
-            print('PASS   ✅\n')
+            print('PASS   ✅')
         else:
-            print('FAILED ❌\n')
+            print('FAILED ❌')
             print('Correct output')
             print(correct_output)
             print('Your output')
