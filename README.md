@@ -23,7 +23,7 @@ python test_tool.py [file python cần test] [file test input] [file test output
 ```
 Ví dụ:
 ```
-python test_tool.py bt1/brute_force.py bt1/tests_input.txt tests_output.txt
+python test_tool.py bt1/brute_force.py bt1/tests_input.txt bt1/tests_output.txt
 ```
 ![kết quả](https://i.imgur.com/2CyhGxC.png)
 ## Format của file test input
