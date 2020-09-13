@@ -5,8 +5,7 @@
 - [Tiến độ bài tập](#tiến-độ-bài-tập)
 - [Hướng dẫn sử dụng test_tool.py](#hướng-dẫn-dùng-test_tool)
     - [Cú pháp](#cú-pháp)
-    - [Format file input](#format-của-file-test-input)
-    - [Format file output](#format-của-file-test-output)
+    - [Cách tạo file input và output](#cách-tạo-file-input-và-output)
 
 # Thành viên
 | Họ và Tên           | MSSV     |
@@ -19,17 +18,18 @@
 # Hướng dẫn dùng test_tool
 ## Cú pháp
 ```
-python test_tool.py [file python cần test] [file test input] [file test output]
+python test_tool.py [file python cần test] [file input] [file output]
 ```
 Ví dụ:
 ```
-python test_tool.py bt1/brute_force.py bt1/tests_input.txt bt1/tests_output.txt
+python test_tool.py bt1/brute_force.py bt1/inp bt1/out
 ```
-![kết quả](https://i.imgur.com/2CyhGxC.png)
-## Format của file test input
-1. Dòng đầu tiên chứa số lượng test
-2. Các dòng tiếp theo là input của từng test
-3. Cuối file phải chứa đúng 1 kí tự xuống dòng
-## Format của file test output
-1. Nhập output của từng test (output của mỗi test có thể nằm trên nhiều dòng)
-2. Cuối file phải chứa đúng 1 kí tự xuống dòng
+![kết quả](https://i.imgur.com/9KyVoAe.png)
+
+## Cách tạo file input và output
+- Copy tất cả input vào file một file, tất cả output vào file riêng
+- Mỗi test case cách nhau bằng chuỗi ```"---\n"```
+- Cuối file output thường là kí tự ```"\n"```
+
+Ví dụ:
+![ví dụ ](https://imgur.com/1VZtkuW.png)

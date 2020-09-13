@@ -1,65 +1,54 @@
 import io
 import sys
 import subprocess
-
-def convert_to_lf(string):
-    return string.replace("\r\n", "\n").replace("\r", "\n")
+from  subprocess import PIPE
 
 if __name__ == '__main__':
-    
-    python_file = sys.argv[1]
+
     try: 
         open(sys.argv[1])
     except FileNotFoundError:
         print(sys.argv[1] + ' not found')
         raise
+    finally:
+        python_file = sys.argv[1]
+
     try:
         input_file = open(sys.argv[2])
     except FileNotFoundError:
         print(sys.argv[2] + ' not found')
         raise
+
     try:
         output_file = open(sys.argv[3])
     except FileNotFoundError:
         print(sys.argv[3] + ' not found')
         raise
 
-    num_test_case = int(input_file.readline())
-    num_line_each_test_input = int(input_file.readline()) 
-    num_line_each_test_output = int(input_file.readline()) 
+    inputs = input_file.read().split('---\n')
+    num_inputs = len(inputs)
+    correct_outputs = output_file.read().split('---\n')
 
-
-    cases = []
-    for _ in range(num_test_case):
-        case = ''
-        for i in range(num_line_each_test_input):
-            case += input_file.readline()
-        cases.append(case)
-
-
-    command = ['python', sys.argv[1]]
+    command = ['python', python_file]
 
     print('-' * 30)
     process_output = ''
 
-    for i in range(num_test_case):
-        process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-        raw_process_output = process.communicate(bytes(cases[i], 'ascii'))[0].decode()
-        process_output = convert_to_lf(raw_process_output)
-
-        correct_output = ''
-        for j in range(num_line_each_test_output):
-            correct_output += convert_to_lf(output_file.readline())
+    for i in range(num_inputs):
+        process_output = subprocess.Popen(command, stdin=PIPE, stdout=PIPE, text=True).communicate(inputs[i])[0]
         
         print('TEST {}: '.format(i + 1), end='')
 
-        if process_output == correct_output:
-            print('PASS   ✅')
+        if process_output == correct_outputs[i]:
+            print('PASS')
         else:
-            print('FAILED ❌')
+            print('FAILED')
             print('Correct output')
-            print(correct_output)
+            print(correct_outputs[i])
             print('Your output')
             print(process_output)
+            print('Correct output\'s length:', len(correct_outputs[i]))
+            print('Your    output\'s length:', len(process_output))
+            
 
         print('-' * 30)
