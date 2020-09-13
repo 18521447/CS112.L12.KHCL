@@ -32,7 +32,6 @@ if __name__ == '__main__':
     command = ['python', python_file]
 
     print('-' * 30)
-    process_output = ''
 
     for i in range(num_inputs):
         process_output = subprocess.Popen(command, stdin=PIPE, stdout=PIPE, text=True).communicate(inputs[i])[0]
