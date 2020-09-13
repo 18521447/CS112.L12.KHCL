@@ -24,6 +24,7 @@ Ví dụ:
 ```
 python test_tool.py bt1/brute_force.py bt1/inp bt1/out
 ```
+<<<<<<< HEAD
 ![kết quả](https://i.imgur.com/9KyVoAe.png)
 
 ## Cách tạo file input và output
