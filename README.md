@@ -24,7 +24,6 @@ Ví dụ:
 ```
 python test_tool.py bt1/brute_force.py bt1/inp bt1/out
 ```
-<<<<<<< HEAD
 ![kết quả](https://i.imgur.com/9KyVoAe.png)
 
 ## Cách tạo file input và output
@@ -33,4 +32,5 @@ python test_tool.py bt1/brute_force.py bt1/inp bt1/out
 - Cuối file output thường là kí tự ```"\n"```
 
 Ví dụ:
+
 ![ví dụ ](https://imgur.com/1VZtkuW.png)
