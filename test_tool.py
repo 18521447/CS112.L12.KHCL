@@ -72,9 +72,8 @@ if __name__ == '__main__':
     except FileNotFoundError:
         print(sys.argv[1] + ' not found')
         raise
-    finally:
-        f.close()
-        
+    f.close()
+
     python_file = sys.argv[1]
     
     test_folder = sys.argv[2]
@@ -122,4 +121,4 @@ if __name__ == '__main__':
         )
 
         inp.close()
-        out.close()
+        out.close()    
