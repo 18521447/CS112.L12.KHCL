@@ -60,7 +60,7 @@ def report(test_id, user_output, correct_output, user_runtime, time_limit, verbo
             report_text.append('\n')
             
         report_text.append('\n')
-        report_text.append('Ran in {:.5f} s'.format(process_runtime))
+        report_text.append('Ran in {:.3f} s'.format(process_runtime))
         report_text.append('\n')
 
     print(''.join(report_text), end='')
@@ -93,7 +93,7 @@ if __name__ == '__main__':
 
     command = ['python', python_file]
     
-    # Run tests
+    # Run tests and report
     for test_id in range(1, num_inputs + 1):
         inp = open(os.path.join(test_folder, 'inp', str(test_id)))
         out = open(os.path.join(test_folder, 'out', str(test_id)))
