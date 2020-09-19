@@ -3,7 +3,7 @@ import sys
 import subprocess
 from time import perf_counter
 
-def report(test_id, user_output, correct_output, user_runtime, time_limit, verbose=False):
+def report(test_id, user_output, correct_output, user_runtime, time_limit, rte, verbose=False):
     '''
         Print test results to screen
     '''
@@ -17,7 +17,9 @@ def report(test_id, user_output, correct_output, user_runtime, time_limit, verbo
     report_text.append('TEST {}: '.format(test_id))
     len_so_far = len(report_text[-1])
 
-    if user_output == correct_output:
+    if rte:
+        return_code = 'RTE'
+    elif user_output == correct_output:
         if time_limit != None and user_runtime > time_limit:
             return_code = 'TLE'
         else:
@@ -44,8 +46,9 @@ def report(test_id, user_output, correct_output, user_runtime, time_limit, verbo
     report_text.append(mark)
     report_text.append('\n')
 
+    # Additional information
     if verbose:
-        if return_code != 'PASS':
+        if return_code not in ['PASS', 'RTE']:
             report_text.append('Correct output\n')
             report_text.append(correct_output)
             report_text.append('\n')
@@ -58,10 +61,13 @@ def report(test_id, user_output, correct_output, user_runtime, time_limit, verbo
             report_text.append('\n')
             report_text.append('Your    output\'s length: ' + str(len(process_output)))
             report_text.append('\n')
-            
-        report_text.append('\n')
-        report_text.append('Ran in {:.3f} s'.format(process_runtime))
-        report_text.append('\n')
+
+        if return_code != 'RTE':
+            report_text.append('\n')
+            report_text.append('Ran in {:.3f} s'.format(process_runtime))
+            report_text.append('\n')
+        else:
+            report_text.append(process_output)
 
     print(''.join(report_text), end='')
 
@@ -100,14 +106,19 @@ if __name__ == '__main__':
         
         correct_output = out.read()
         
+        rte = False
         start = perf_counter()
-
-        process_output = subprocess.run(
-            command, 
-            stdin=inp, 
-            text=True, 
-            capture_output=True
-        ).stdout
+        try:
+            process_output = subprocess.run(
+                command, 
+                stdin=inp,
+                check=True,
+                text=True, 
+                capture_output=True
+            ).stdout
+        except subprocess.CalledProcessError as exc:
+            rte = True
+            process_output = exc.stderr
 
         process_runtime = perf_counter() - start
 
@@ -117,6 +128,7 @@ if __name__ == '__main__':
             correct_output, 
             process_runtime, 
             time_limit,
+            rte,
             is_verbose
         )
 

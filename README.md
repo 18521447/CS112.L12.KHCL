@@ -16,7 +16,7 @@
 # Tiến độ bài tập
 - [x] [Bài tập 1 BOT](https://github.com/18521447/CS112.L12.KHCL/tree/master/bt1)
 # Test tool
-Python script giúp test code python (gần giống wecode)
+Tool giúp test code python (gần giống wecode)
 ## Cú pháp
 ```
 python test_tool.py [python_file] [test_foler] <time_limit> <-v>
