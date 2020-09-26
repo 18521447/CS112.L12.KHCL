@@ -15,6 +15,8 @@
 | Lê Anh Triều        | 18521536 |
 # Tiến độ bài tập
 - [x] [Bài tập 1 BOT](https://github.com/18521447/CS112.L12.KHCL/tree/master/bt1)
+- [x] [Bài tập 2 Tảo biển] (https://github.com/18521447/CS112.L12.KHCL/tree/master/bt2/tao_bien)
+- [ ] [Bài tập 3 H_index]
 # Test tool
 Tool giúp test code python (gần giống wecode)
 ## Cú pháp
