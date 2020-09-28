@@ -3,7 +3,16 @@ import sys
 import subprocess
 from time import perf_counter
 
-def report(test_id, user_output, correct_output, user_runtime, time_limit, rte, verbose=False):
+def report(
+        test_id, 
+        user_output, 
+        correct_output, 
+        user_runtime, 
+        time_limit, 
+        rte, 
+        tle, 
+        verbose=False
+):
     '''
         Print test results to screen
     '''
@@ -19,10 +28,9 @@ def report(test_id, user_output, correct_output, user_runtime, time_limit, rte, 
 
     if rte:
         return_code = 'RTE'
+    elif tle:
+        return_code = 'TLE'
     elif user_output == correct_output:
-        if time_limit != None and user_runtime > time_limit:
-            return_code = 'TLE'
-        else:
             return_code = 'PASS'
     else:        
         return_code = 'FAILED'
@@ -48,7 +56,7 @@ def report(test_id, user_output, correct_output, user_runtime, time_limit, rte, 
 
     # Additional information
     if verbose:
-        if return_code not in ['PASS', 'RTE']:
+        if return_code not in ['PASS', 'RTE', 'TLE']:
             report_text.append('Correct output\n')
             report_text.append(correct_output)
             report_text.append('\n')
@@ -107,6 +115,7 @@ if __name__ == '__main__':
         correct_output = out.read()
         
         rte = False
+        tle = False
         start = perf_counter()
         try:
             process_output = subprocess.run(
@@ -114,11 +123,15 @@ if __name__ == '__main__':
                 stdin=inp,
                 check=True,
                 text=True, 
-                capture_output=True
+                capture_output=True,
+                timeout=time_limit
             ).stdout
         except subprocess.CalledProcessError as exc:
             rte = True
             process_output = exc.stderr
+        except subprocess.TimeoutExpired:
+            tle = True
+            process_output = ''
 
         process_runtime = perf_counter() - start
 
@@ -129,6 +142,7 @@ if __name__ == '__main__':
             process_runtime, 
             time_limit,
             rte,
+            tle,
             is_verbose
         )
 
