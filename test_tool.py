@@ -2,15 +2,18 @@ import os
 import sys
 import subprocess
 from time import perf_counter
+from os import listdir
+from os.path import join
+
 
 def report(
-        test_id, 
-        user_output, 
-        correct_output, 
-        user_runtime, 
-        time_limit, 
-        rte, 
-        tle, 
+        test_id,
+        user_output,
+        correct_output,
+        user_runtime,
+        time_limit,
+        rte,
+        tle,
         verbose=False
 ):
     '''
@@ -31,10 +34,10 @@ def report(
     elif tle:
         return_code = 'TLE'
     elif user_output == correct_output:
-            return_code = 'PASS'
-    else:        
+        return_code = 'PASS'
+    else:
         return_code = 'FAILED'
-    
+
     LEFT_MARGIN = 9
     padding = MAX_LEN - len_so_far - LEFT_MARGIN
 
@@ -46,11 +49,11 @@ def report(
     padding = MAX_LEN - len_so_far - 2
 
     report_text.append(' ' * padding)
-    
+
     mark = '✅'
     if return_code != 'PASS':
         mark = '❌'
-        
+
     report_text.append(mark)
     report_text.append('\n')
 
@@ -60,14 +63,16 @@ def report(
             report_text.append('Correct output\n')
             report_text.append(correct_output)
             report_text.append('\n')
-            
+
             report_text.append('Your output\n')
             report_text.append(process_output)
             report_text.append('\n')
 
-            report_text.append('Correct output\'s length: ' + str(len(correct_output)))
+            report_text.append('Correct output\'s length: ' +
+                               str(len(correct_output)))
             report_text.append('\n')
-            report_text.append('Your    output\'s length: ' + str(len(process_output)))
+            report_text.append('Your    output\'s length: ' +
+                               str(len(process_output)))
             report_text.append('\n')
 
         if return_code != 'RTE':
@@ -79,9 +84,10 @@ def report(
 
     print(''.join(report_text), end='')
 
+
 if __name__ == '__main__':
 
-    try: 
+    try:
         f = open(sys.argv[1])
     except FileNotFoundError:
         print(sys.argv[1] + ' not found')
@@ -89,7 +95,7 @@ if __name__ == '__main__':
     f.close()
 
     python_file = sys.argv[1]
-    
+
     test_folder = sys.argv[2]
 
     try:
@@ -102,27 +108,28 @@ if __name__ == '__main__':
     is_verbose = False
     if sys.argv[-1] == '-v':
         is_verbose = True
-    
+
     num_inputs = len(os.listdir(os.path.join(test_folder, 'inp')))
 
     command = ['python', python_file]
-    
+
     # Run tests and report
-    for test_id in range(1, num_inputs + 1):
-        inp = open(os.path.join(test_folder, 'inp', str(test_id)))
-        out = open(os.path.join(test_folder, 'out', str(test_id)))
-        
+    inp_files_name = sorted(listdir(join(test_folder, 'inp')))
+    for test_id in inp_files_name:
+        inp = open(join(test_folder, 'inp', test_id))
+        out = open(join(test_folder, 'out', test_id))
+
         correct_output = out.read()
-        
+
         rte = False
         tle = False
         start = perf_counter()
         try:
             process_output = subprocess.run(
-                command, 
+                command,
                 stdin=inp,
                 check=True,
-                text=True, 
+                text=True,
                 capture_output=True,
                 timeout=time_limit
             ).stdout
@@ -138,8 +145,8 @@ if __name__ == '__main__':
         report(
             test_id,
             process_output,
-            correct_output, 
-            process_runtime, 
+            correct_output,
+            process_runtime,
             time_limit,
             rte,
             tle,
@@ -147,4 +154,4 @@ if __name__ == '__main__':
         )
 
         inp.close()
-        out.close()    
+        out.close()
