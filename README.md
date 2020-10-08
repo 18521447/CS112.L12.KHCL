@@ -16,4 +16,4 @@
 - [x] [Bài tập 1 BOT](https://github.com/18521447/CS112.L12.KHCL/tree/master/bt1)
 - [x] [Bài tập 2 Tảo biển](https://github.com/18521447/CS112.L12.KHCL/tree/master/bt2/tao_bien)
 - [x] [Bài tập 3 H_index](https://github.com/18521447/CS112.L12.KHCL/tree/master/bt3/H_index)
-- [ ] [Bài tập 4 Đổi mới](https://github.com/18521447/CS112.L12.KHCL/tree/master/bt4/doi_moi)
+- [x] [Bài tập 4 Đổi mới](https://github.com/18521447/CS112.L12.KHCL/tree/master/bt4/doi_moi)
