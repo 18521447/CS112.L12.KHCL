@@ -7,11 +7,11 @@ def solve(lock: str) -> str:
     inf = 10
     redundants = [inf, inf, inf]
     remainder_of_lock = int(lock) % 3
+    lock = map(int, list(lock))
 
     counter = [0 for _ in range(10)]
 
     for num in lock:
-        num = int(num)
         counter[num] += 1
         remainder_of_num = num % 3
 
