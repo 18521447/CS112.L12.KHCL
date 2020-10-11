@@ -1,17 +1,13 @@
-def solve(lock: str) -> str:
-    # if remainder_of_lock != 0
-    # redundants[0] stores the number that satisfies 
-    # this equation redundants[0] % 3 == remainder_of_lock
-    # redundants[1], redundants[2] stores numbers that satisfy
-    # this equation (redundants[1] + redundants[2]) % 3 == remainder_of_lock
+import sys
+
+def something_cool(lock):
     inf = 10
     redundants = [inf, inf, inf]
     remainder_of_lock = int(lock) % 3
-    lock = map(int, list(lock))
 
     counter = [0 for _ in range(10)]
 
-    for num in lock:
+    for num in map(int, list(lock)):
         counter[num] += 1
         remainder_of_num = num % 3
 
@@ -34,15 +30,12 @@ def solve(lock: str) -> str:
         counter[redundants[1]] -= 1
         counter[redundants[2]] -= 1
 
-    unlock = []
     for num in reversed(range(10)):
-        unlock.append(str(num) * counter[num])
+        sys.stdout.write(str(num) * counter[num])
 
-    return ''.join(unlock)
+    sys.stdout.write('\n')
 
 
 if __name__ == '__main__':
     lock = input().strip()
-    unlock = solve(lock)
-    print(unlock)
-# old version
+    something_cool(lock)
