@@ -45,4 +45,3 @@ if __name__ == '__main__':
     lock = input().strip()
     unlock = solve(lock)
     print(unlock)
-# old version
