@@ -1,5 +1,4 @@
 from itertools import combinations
-from typing import Tuple
 
 
 def and_operator(iterable):
