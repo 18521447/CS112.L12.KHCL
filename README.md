@@ -52,13 +52,15 @@
     - [ ] Báo cáo
     - [ ] Code
 
-- [x] [Bài tập tuần 6](https://github.com/18521447/CS112.L12.KHCL/blob/master/bt6/)
+- [x] [Bài tập tuần 6 + 7](https://github.com/18521447/CS112.L12.KHCL/blob/master/bt6/)
 
   - [x] [Mức độ giống nhau](https://github.com/18521447/CS112.L12.KHCL/tree/master/bt6/compare_dna)
     - [x] [Báo cáo](https://github.com/18521447/CS112.L12.KHCL/tree/master/bt6/compare_dna/Bao_Cao.ipynb)
     - [x] Code
   - [x] [Địa lan](https://github.com/18521447/CS112.L12.KHCL/tree/master/bt6/dia_lan)
     - [x] [Báo cáo](https://github.com/18521447/CS112.L12.KHCL/tree/master/bt6/dia_lan/Bao_Cao.ipynb)
+    - [ ] [Code tạo tests](https://github.com/18521447/CS112.L12.KHCL/tree/master/bt6/dia_lan/Test_Plan_Generator.ipynb)
+    - [ ] [Tests](https://github.com/18521447/CS112.L12.KHCL/tree/master/bt6/dia_lan/tests)
     - [x] Code
 
 - [ ] [Bài tập tuần 7](https://github.com/18521447/CS112.L12.KHCL/blob/master/bt7/)
