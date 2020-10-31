@@ -63,4 +63,4 @@
     - [ ] [Tests](https://github.com/18521447/CS112.L12.KHCL/tree/master/bt6/dia_lan/tests)
     - [x] Code
 
-- [ ] [Bài tập tuần 7](https://github.com/18521447/CS112.L12.KHCL/blob/master/bt7/)
+- [ ] [Bài tập tuần 8](https://github.com/18521447/CS112.L12.KHCL/blob/master/bt8/)
