@@ -41,10 +41,19 @@ class DiaLanTest:
         self.__is_yes: bool = output_is_yes
         self.__one_combination: bool = one_combination
 
-        if self.k >= self.max_number_of_bits and self.is_no:
+        if self.is_no and self.k >= self.max_number_of_bits:
             self.__use_col_one = True
         else:
             self.__use_col_one = np.random.randint(2, dtype=np.bool)
+        
+        # Determine suitable size for top_right matrix
+        self.__real_k = self.k
+        if self.is_no and not self.__use_col_one:
+            n_bound = self.n - 1 if self.__one_combination else self.n
+            self.__real_k = np.random.randint(self.k + 1, min(n_bound, self.max_number_of_bits) + 1)
+
+
+            
 
         self.__generate_new_bit_matrix()
 
@@ -116,7 +125,7 @@ class DiaLanTest:
             Return a random k x (max_number_of_bits - k) matrix
         """
         row_count = self.k
-        col_count = self.__max_number_of_bits - self.k
+        col_count = self.max_number_of_bits - self.k
         matrix = np.random.randint(2, size=(row_count, col_count), dtype=np.uint8)
 
         if col_count == 0:
@@ -150,5 +159,5 @@ class DiaLanTest:
             Return a random (n - k) x (max_number_of_bits - k) matrix
         """
         row_count = self.n - self.k
-        col_count = self.__max_number_of_bits - self.k
+        col_count = self.max_number_of_bits - self.k
         return np.random.randint(2, size=(row_count, col_count), dtype=np.uint8)
