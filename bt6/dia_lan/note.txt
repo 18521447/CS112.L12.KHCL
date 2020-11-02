@@ -28,10 +28,24 @@ Cách 1:
 Cách 2: không có tổ hợp nào = 0
 	có ít nhất 1 cột toàn bit 1
 	
-Để tạo test yes
-------------------------------------
-Trinh bay cách tạo mảng n số chỉ có duy nhất 1 tổ hợp = 0
-	
+
+---------------------------------------------------------------------------
+        + Cách tạo mảng n số chỉ có duy nhất 1 tổ hợp ktt and lại = 0
+B1: tạo tổ hợp ktt and lại = 0
+B2: thêm x số sao cho x + k = n, x số này không được làm tăng số tổ hợp
+----------------------------------------------------------------------------
+        + Cách tạo mảng n số chỉ có duy nhất NHIỀU tổ hợp ktt and lại = 0
+B1: tạo tổ hợp ktt and lại = 0
+B2: thêm x số sao cho x + k = n, x số này làm tăng số tổ hợp
+
+
+
+
+
+
+
+
+
 Giả sử các số trong mảng có tối đa 3 bit. Tìm 3 số sao cho and lại = 0 và không có tổ hợp nào ít hơn 3 số and lại = 0
 Chỉ có 1 TH duy nhất thỏa
 	110
