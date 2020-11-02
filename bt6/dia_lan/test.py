@@ -51,6 +51,8 @@ class DiaLanTest:
         if self.is_no and not self.__use_col_one:
             n_bound = self.n - 1 if self.__one_combination else self.n
             self.__real_k = np.random.randint(self.k + 1, min(n_bound, self.max_number_of_bits) + 1)
+        elif self.is_yes:
+            
 
 
             
