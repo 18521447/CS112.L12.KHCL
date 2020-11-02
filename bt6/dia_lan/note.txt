@@ -1,0 +1,76 @@
+one_C  = one_combination 
+more_C = not one_combination
+
+no -> kdb >= maxbit -> use_col_one
+   -> kdb  < maxbit -> use_col_one
+                    ->   one_C -> ktt (kdb..min(n  , maxbit)]
+                    ->  more_C -> ktt (kdb..min(n-1, maxbit)]
+
+yes -> one_C  -> kdb  > maxbit -> ktt [1..maxbit]
+              -> kdb <= maxbit -> ktt [1..kdb]
+                                         
+    -> more_C -> kdb <= maxbit -> kdb = n -> ktt [1..kdb)
+                               -> kdb < n -> ktt [1..kdb]
+                               
+                               
+---------------------------------------                               
+đặt 
+	- kdb = tổ hợp k số and = 0 theo y/c d/b
+	- ktt = tổ hợp ít nhất k số and = 0 trong mảng arr. (xét tất cả tổ hợp bé hơn k thì không có tổ hợp nào = 0)
+------------------
+MIndMAP (các trường hợp để test)
+Để taạo test no 2 cách:
+Cách 1: 
+	kdb < ktt <= n
+ Do có tổ hợp gồm ktt số and lại = 0 nên chia 2 trường hợp:
+ 		th1: chỉ 1 tổ hợp ktt duy nhất
+ 		th2: có nhiều th
+Cách 2: không có tổ hợp nào = 0
+	có ít nhất 1 cột toàn bit 1
+	
+Để tạo test yes
+------------------------------------
+Trinh bay cách tạo mảng n số chỉ có duy nhất 1 tổ hợp = 0
+	
+Giả sử các số trong mảng có tối đa 3 bit. Tìm 3 số sao cho and lại = 0 và không có tổ hợp nào ít hơn 3 số and lại = 0
+Chỉ có 1 TH duy nhất thỏa
+	110
+	101
+	011
+	HOẶC (ĐẢO VỊ TRÍ)
+	110
+	011
+	101
+	
+
+Xét thử TH khác
+	001
+	010
+	100
+	
+Ta thấy có tồn tại tổ hợp ít hơn 3 số = 0 đó là (001 & 010) = 0
+
+Tương tự như vậy Giả sử các số trong mảng có tối đa 4 bit. Tìm 4 số sao cho and lại = 0 và không có tổ hợp nào ít hơn 4 số and lại = 0
+ Chỉ có 1 TH duy nhất thỏa
+ 1110
+ 1101
+ 1011
+ 0111
+ ma trận bit trên là ma trận đường chéo số 0
+ 
+ Giả sử các số trong mảng có tối đa 5 bit. Tìm 3 số sao cho and lại = 0 và không có tổ hợp nào ít hơn 3 số and lại = 0
+ 
+ top_right: sẽ đảm bảo điều kiện trên
+ top_left: mỗi cột có ít nhất 1 bit 0 để cột đó and lại = 0
+l+r sẽ thỏa đề bài do tat61 cả các bit = 0
+ 
+
+
+
+
+
+
+
+
+
+rfrrrrrrrrrrr
