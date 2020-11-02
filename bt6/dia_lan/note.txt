@@ -1,6 +1,14 @@
 one_C = one_combination 
 no -> kdb >= maxbit -> use_col_one
    -> kdb  < maxbit -> use_col_one
-                    -> ktt > kdb (ktt = randint(kdb + 1, maxbit + 1)) -> one_combination [True, False]
+                    -> ktt (kdb..maxbit] -> one_C [True, False]
 
-yes -> one_co ->                     
+yes -> one_C T -> kdb = n -> n    > maxbit -> ktt [1..maxbit] (ktt < kdb)
+                          -> n   <= maxbit -> ktt [1..kdb]
+               -> kdb < n -> kdb  > maxbit -> ktt [1..maxbit]
+                          -> kdb <= maxbit -> ktt [1..kdb]
+                                         
+    -> one_C F -> kdb = n -> n    > maxbit -> ktt [1..maxbit] (ktt < kdb)
+                          -> n   <= maxbit -> ktt [1..kdb)
+               -> kdb < n -> kdb  > maxbit -> ktt [1..maxbit]
+                          -> kdb <= maxbit -> ktt [1..kdb]
