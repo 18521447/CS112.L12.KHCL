@@ -1,0 +1,6 @@
+one_C = one_combination 
+no -> kdb >= maxbit -> use_col_one
+   -> kdb  < maxbit -> use_col_one
+                    -> ktt > kdb (ktt = randint(kdb + 1, maxbit + 1)) -> one_combination [True, False]
+
+yes -> one_co ->                     
