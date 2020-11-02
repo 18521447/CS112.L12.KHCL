@@ -9,7 +9,7 @@ def shuffle(matrix: np.ndarray):
     np.random.shuffle(matrix.transpose())
 
 
-class DiaLanTest:
+class DiaLanTestCreator:
     """
         Class to create test for Dia Lan exercises
     """
@@ -88,7 +88,7 @@ class DiaLanTest:
 
     @property
     def input(self) -> str:
-        cache = [self.n, ' ', self.k, '\n']
+        cache = [str(self.n), ' ', str(self.k), '\n']
         for row in self.__bit_matrix:
             cache.append(str(int(''.join(map(str, row)), 2)))
             cache.append(' ')
@@ -147,9 +147,10 @@ class DiaLanTest:
         if col_count == 0:
             return matrix
 
-        col_all_ones = (matrix == 1).all(0)
-        total_col_all_ones = np.sum(col_all_ones)
-        matrix[np.random.randint(2, size=total_col_all_ones), col_all_ones] = 0
+        cols_all_ones = (matrix == 1).all(0)
+        total_col_all_ones = np.sum(cols_all_ones)
+        random_rows = np.random.randint(self.__real_k, size=total_col_all_ones)
+        matrix[random_rows, cols_all_ones] = 0
 
         return matrix
 
@@ -177,3 +178,8 @@ class DiaLanTest:
         row_count = self.n - self.__real_k
         col_count = self.max_number_of_bits - self.__real_k
         return np.random.randint(2, size=(row_count, col_count), dtype=np.uint8)
+
+
+a = DiaLanTestCreator(n=2, k=2, output_is_yes=True, one_combination=True)
+print(a.input)
+print(a.output)
