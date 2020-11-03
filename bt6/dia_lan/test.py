@@ -1,3 +1,5 @@
+from os.path import join
+
 import numpy as np
 
 
@@ -179,7 +181,20 @@ class DiaLanTestCreator:
         col_count = self.max_number_of_bits - self.__real_k
         return np.random.randint(2, size=(row_count, col_count), dtype=np.uint8)
 
+    def write_to_disk(self, filename: str, location: str = '.'):
+        input_file = join(location, 'inp', filename)
+        output_file = join(location, 'out', filename)
+        with open(input_file, 'w') as inp:
+            inp.write(self.input)
+        with open(output_file, 'w') as out:
+            out.write(self.output)
 
-a = DiaLanTestCreator(n=2, k=2, output_is_yes=True, one_combination=True)
-print(a.input)
-print(a.output)
+
+save_path = "C:\\Users\\Thinh\\code\\python\\CS112.L12.KHCL\\bt6\\dia_lan\\tests_draft"
+
+id = 1
+
+for n in np.arange(1, 15):
+    for k in np.arange(1, n + 1):
+        DiaLanTestCreator(n, k, output_is_yes=False, one_combination=True).write_to_disk(str(id), save_path)
+        id += 1
