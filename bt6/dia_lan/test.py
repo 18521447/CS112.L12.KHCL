@@ -15,7 +15,7 @@ def shuffle(matrix: np.ndarray):
     np.random.shuffle(matrix.transpose())
 
 
-def random_bool(size: Union[int, Iterable, Tuple[int], None] = None) -> Union[bool, int, np.ndarray]:
+def random_bits(size: Union[int, Iterable, Tuple[int], None] = None) -> Union[int, np.ndarray]:
     return randint(2, size=size, dtype=np.uint8)
 
 
@@ -43,8 +43,8 @@ class DiaLanTestCreator:
         self.__max_number_of_bits: int = max_number_of_bits
         self.__is_yes: bool = is_yes
 
-        self.__one_combination: bool = random_bool()
-        self.__use_col_one: bool = True if self.is_no and self.k >= self.__max_number_of_bits else random_bool()
+        self.__one_combination: bool = bool(random_bits())
+        self.__use_col_one: bool = True if self.is_no and self.k >= self.__max_number_of_bits else bool(random_bits())
 
         current_config = \
             "Current config:\n" + \
@@ -155,7 +155,7 @@ class DiaLanTestCreator:
         if self.__use_col_one:
             row_count: int = self.n
             col_count: int = self.max_number_of_bits
-            self.__bit_matrix = random_bool((row_count, col_count))
+            self.__bit_matrix = random_bits((row_count, col_count))
             total_cols_one = randint(1, col_count + 1)
             cols_one_mask = randint(0, col_count, size=total_cols_one)
             self.__bit_matrix[:, cols_one_mask] = 1
@@ -183,7 +183,7 @@ class DiaLanTestCreator:
         """
         row_count = self.__real_k
         col_count = self.max_number_of_bits - self.__real_k
-        matrix = random_bool((row_count, col_count))
+        matrix = random_bits((row_count, col_count))
 
         if col_count == 0:
             return matrix
@@ -218,7 +218,7 @@ class DiaLanTestCreator:
         """
         row_count = self.n - self.__real_k
         col_count: int = self.max_number_of_bits - self.__real_k
-        return random_bool((row_count, col_count))
+        return random_bits((row_count, col_count))
 
     def write_to_disk(self, filename: str, location: str = '.'):
         input_file = os.path.join(location, 'inp', filename)
