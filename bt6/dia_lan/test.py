@@ -1,5 +1,5 @@
 import os
-from typing import Iterable, Optional, Union, Tuple
+from typing import Iterable, Union, Optional
 
 import numpy as np
 from numpy.random import randint
@@ -15,7 +15,7 @@ def shuffle(matrix: np.ndarray):
     np.random.shuffle(matrix.transpose())
 
 
-def random_bits(size: Union[int, Iterable, Tuple[int], None] = None) -> Union[int, np.ndarray]:
+def random_bits(size: Union[int, Iterable, None] = None) -> Union[int, np.ndarray]:
     return randint(2, size=size, dtype=np.uint8)
 
 
@@ -43,8 +43,13 @@ class DiaLanTestCreator:
         self.__max_number_of_bits: int = max_number_of_bits
         self.__is_yes: bool = is_yes
 
-        self.__one_combination: bool = bool(random_bits())
-        self.__use_col_one: bool = True if self.is_no and self.k >= self.__max_number_of_bits else bool(random_bits())
+        self.__one_combination: bool = True
+        if self.k != 1 and self.n != 1:
+            self.__one_combination = bool(random_bits())
+
+        self.__use_col_one = False
+        if self.is_no:
+            self.__use_col_one = True if self.k >= self.max_number_of_bits else bool(random_bits())
 
         current_config = \
             "Current config:\n" + \
@@ -58,8 +63,8 @@ class DiaLanTestCreator:
         # How to choose randomly a suitable size (__real_k) for top_right matrix
         #     no  -> kdb >= maxbit -> use_col_one
         #         -> kdb  < maxbit -> use_col_one
-        #                          ->   one_C            -> ktt(kdb..min(n, maxbit)]
-        #                          ->  more_C            -> ktt(kdb..min(n - 1, maxbit)]
+        #                          ->   one_C            -> ktt(kdb..maxbit]
+        #                          ->  more_C            -> ktt(kdb..maxbit]
         #
         #     yes -> kdb > maxbit  -> one_C             -> ktt[1..maxbit]
         #                          -> more_C            -> ktt[1..maxbit]
@@ -75,35 +80,27 @@ class DiaLanTestCreator:
         #                      "  - output_is_yes={}\n"
         #                      "  - one_combination={}".format(n, k, output_is_yes, one_combination))
 
-        __N_NOT_LARGE_ENOUGH = "n is not large enough to create more combinations\n"
-
         if self.is_yes and self.__use_col_one:
             raise ValueError("Test output is YES so all the columns must have at least one zero\n" +
                              current_config)
 
-        if not self.is_yes and k >= max_number_of_bits:
-            if not self.__use_col_one:
-                raise ValueError("Output is NO and k >= max_number_of_bits so all columns mustn't have any 0\n" +
-                                 current_config)
+        if self.is_no and k >= max_number_of_bits and not self.__use_col_one:
+            raise ValueError("Output is NO and k >= max_number_of_bits so all columns mustn't have any 0\n" +
+                             current_config)
 
-        # Choose randomly a suitable size for top_right matrix
+        # Choose randomly a suitable size (self.__real_k) for top_right matrix
+        real_k_min = 1
+        real_k_max = self.max_number_of_bits + 1
+
         if self.is_no and not self.__use_col_one:
-            n_bound = self.n if self.__one_combination else self.n - 1
-            try:
-                self.__real_k = randint(self.k + 1, min(n_bound, self.max_number_of_bits) + 1)
-            except ValueError:
-                raise ValueError(__N_NOT_LARGE_ENOUGH + current_config)
+            real_k_min = self.k + 1
         elif self.is_yes:
-            if self.k > self.max_number_of_bits:
-                self.__real_k = randint(1, self.max_number_of_bits + 1)
-            else:
-                if self.__one_combination or self.k < self.n:
-                    self.__real_k = randint(1, self.k + 1)
-                else:
-                    try:
-                        self.__real_k = randint(1, self.k)
-                    except ValueError:
-                        raise ValueError(__N_NOT_LARGE_ENOUGH + current_config)
+            if self.k <= self.max_number_of_bits:
+                real_k_max = self.k + 1
+            if not self.one_combination and self.k == n:
+                real_k_max -= 1
+
+        self.__real_k = min(randint(real_k_min, real_k_max), n)
 
         self.__generate_new_bit_matrix()
 
@@ -114,6 +111,10 @@ class DiaLanTestCreator:
     @property
     def k(self) -> int:
         return self.__k
+
+    @property
+    def real_k(self) -> Optional[int]:
+        return None if self.use_col_one else self.__real_k
 
     @property
     def max_number_of_bits(self) -> int:
@@ -148,13 +149,17 @@ class DiaLanTestCreator:
     def output(self) -> str:
         return "YES\n" if self.__is_yes else "NO\n"
 
+    @property
+    def bit_matrix(self) -> np.ndarray:
+        return self.__bit_matrix
+
     def __generate_new_bit_matrix(self):
         """
             Each row of the bit matrix corresponds to a decimal number
         """
         if self.__use_col_one:
-            row_count: int = self.n
-            col_count: int = self.max_number_of_bits
+            row_count = self.n
+            col_count = self.max_number_of_bits
             self.__bit_matrix = random_bits((row_count, col_count))
             total_cols_one = randint(1, col_count + 1)
             cols_one_mask = randint(0, col_count, size=total_cols_one)
@@ -199,7 +204,7 @@ class DiaLanTestCreator:
         """
             Return a random (n - k) x k matrix representing padding bits below the core matrix.
         """
-        row_count = self.n - self.__real_k
+        row_count = max(self.n - self.__real_k, 0)
         col_count = self.__real_k
         matrix = np.ones((row_count, col_count), np.uint8)
 
@@ -216,7 +221,7 @@ class DiaLanTestCreator:
         """
             Return a random (n - k) x (max_number_of_bits - k) matrix
         """
-        row_count = self.n - self.__real_k
+        row_count = max(self.n - self.__real_k, 0)
         col_count: int = self.max_number_of_bits - self.__real_k
         return random_bits((row_count, col_count))
 
@@ -233,73 +238,12 @@ if __name__ == '__main__':
     save_path = "C:\\Users\\Thinh\\code\\python\\CS112.L12.KHCL\\bt6\\dia_lan\\tests_draft"
 
     id_ = 1
-    t = True
-    f = False
-    # for n_ in np.arange(11, 13):
-    #     for k_ in np.arange(1, n_ + 1):
-    #         if n_ == 1 and k_ == 1:
-    #             continue
-    #         DiaLanTestCreator(n_,
-    #                           k_,
-    #                           output_is_yes=t,
-    #                           one_combination=t,
-    #                           use_col_one=f).write_to_disk(str(id_), save_path)
-    #         id_ += 1
-    #         # DiaLanTestCreator(n_,
-    #         #                   k_,
-    #         #                   output_is_yes=t,
-    #         #                   one_combination=f,
-    #         #                   use_col_one=t).write_to_disk(str(id_), save_path)
-    #         # id_ += 1
-    #
-    #         DiaLanTestCreator(n_,
-    #                           k_,
-    #                           output_is_yes=t,
-    #                           one_combination=f,
-    #                           use_col_one=f).write_to_disk(str(id_), save_path)
-    #         id_ += 1
-    #         DiaLanTestCreator(n_,
-    #                           k_,
-    #                           output_is_yes=f,
-    #                           one_combination=t,
-    #                           use_col_one=t).write_to_disk(str(id_), save_path)
-    #         id_ += 1
-    #         if not (n_ == k_ or k_ >= 12):
-    #             DiaLanTestCreator(n_,
-    #                               k_,
-    #                               output_is_yes=f,
-    #                               one_combination=t,
-    #                               use_col_one=f).write_to_disk(str(id_), save_path)
-    #             id_ += 1
-    #         DiaLanTestCreator(n_,
-    #                           k_,
-    #                           output_is_yes=f,
-    #                           one_combination=f,
-    #                           use_col_one=t).write_to_disk(str(id_), save_path)
-    #         id_ += 1
-    #         if not (k_ + 1 >= n_ - 1):
-    #
-    #             DiaLanTestCreator(n_,
-    #                               k_,
-    #                               output_is_yes=f,
-    #                               one_combination=f,
-    #                               use_col_one=f).write_to_disk(str(id_), save_path)
-    #             id_ += 1
-    #
-    usecolone_count = 0
-    one_com_count = 0
-    more_com_count = 0
-    for n_ in np.arange(1, 13):
+
+    for n_ in np.arange(1, 20):
         for k_ in np.arange(1, n_ + 1):
-            test = DiaLanTestCreator(n_, k_, is_yes=f)
-            test.write_to_disk(str(id_), save_path)
-            if test.use_col_one:
-                usecolone_count += 1
-            elif test.one_combination:
-                one_com_count += 1
-            else:
-                more_com_count += 1
+            DiaLanTestCreator(n_, k_, True).write_to_disk(str(id_), save_path)
             id_ += 1
-    print(usecolone_count)
-    print(one_com_count)
-    print(more_com_count)
+            DiaLanTestCreator(n_, k_, False).write_to_disk(str(id_), save_path)
+            id_ += 1
+
+    print(id_)
