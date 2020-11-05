@@ -239,11 +239,3 @@ if __name__ == '__main__':
             id_ += 1
             DiaLanTestCreator(n_, k_, False).write_to_disk(str(id_), save_path)
             id_ += 1
-
-    # a = DiaLanTestCreator(1, 1, False)
-    # print(a.input)
-    # print(a.output)
-    # print()
-    # print(a.current_config)
-    # id_ += 1
-    # print(id_)
