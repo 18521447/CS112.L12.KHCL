@@ -229,7 +229,7 @@ class DiaLanTestCreator:
 
 
 if __name__ == '__main__':
-    save_path = "C:\\Users\\Thinh\\code\\python\\CS112.L12.KHCL\\bt6\\dia_lan\\tests_draft"
+    save_path = "C:\\Users\\Thinh\\code\\python\\CS112.L12.KHCL\\bt6\\dia_lan\\tests"
 
     id_ = 1
 
