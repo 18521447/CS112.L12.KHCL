@@ -51,7 +51,7 @@ class DiaLanTestCreator:
         if self.is_no:
             self.__use_col_one = True if self.k >= self.max_number_of_bits else bool(random_bits())
 
-        current_config = \
+        self.current_config = \
             "Current config:\n" + \
             "   - n={}\n".format(self.n) + \
             "   - k={}\n".format(self.k) + \
@@ -59,6 +59,14 @@ class DiaLanTestCreator:
             "   - one_combination={}\n".format(self.__one_combination) + \
             "   - use_col_one={}\n".format(self.__use_col_one) + \
             "   - max_number_of_bits={}\n".format(self.max_number_of_bits)
+
+        if self.is_yes and self.__use_col_one:
+            raise ValueError("Test output is YES so all the columns must have at least one zero\n" +
+                             self.current_config)
+
+        if self.is_no and k >= max_number_of_bits and not self.__use_col_one:
+            raise ValueError("Output is NO and k >= max_number_of_bits so all columns mustn't have any 0\n" +
+                             self.current_config)
 
         # How to choose randomly a suitable size (__real_k) for top_right matrix
         #     no  -> kdb >= maxbit -> use_col_one
@@ -71,36 +79,20 @@ class DiaLanTestCreator:
         #         -> kdb <= maxbit -> one_C             -> ktt[1..kdb]
         #                          -> more_C -> kdb = n -> ktt[1..kdb)
         #                                    -> kdb < n -> ktt[1..kdb]
-        # Check error
-        # if k == 1 and n == 1 and not one_combination:
-        #     raise ValueError("n is not large enough to create more combinations\n"
-        #                      "Current config:\n"
-        #                      "  - n={}\n"
-        #                      "  - k={}\n"
-        #                      "  - output_is_yes={}\n"
-        #                      "  - one_combination={}".format(n, k, output_is_yes, one_combination))
-
-        if self.is_yes and self.__use_col_one:
-            raise ValueError("Test output is YES so all the columns must have at least one zero\n" +
-                             current_config)
-
-        if self.is_no and k >= max_number_of_bits and not self.__use_col_one:
-            raise ValueError("Output is NO and k >= max_number_of_bits so all columns mustn't have any 0\n" +
-                             current_config)
 
         # Choose randomly a suitable size (self.__real_k) for top_right matrix
         real_k_min = 1
         real_k_max = self.max_number_of_bits + 1
 
-        if self.is_no and not self.__use_col_one:
-            real_k_min = self.k + 1
+        if self.is_no and not self.use_col_one:
+            real_k_min = min(self.k, self.max_number_of_bits) + 1
         elif self.is_yes:
             if self.k <= self.max_number_of_bits:
-                real_k_max = self.k + 1
+                real_k_max = min(self.k, self.max_number_of_bits) + 1
             if not self.one_combination and self.k == n:
                 real_k_max -= 1
 
-        self.__real_k = min(randint(real_k_min, real_k_max), n)
+        self.__real_k: int = randint(real_k_min, real_k_max)
 
         self.__generate_new_bit_matrix()
 
@@ -139,8 +131,10 @@ class DiaLanTestCreator:
     @property
     def input(self) -> str:
         cache = [str(self.n), ' ', str(self.k), '\n']
-        for row in self.__bit_matrix:
-            cache.append(str(int(''.join(map(str, row)), 2)))
+        for r in range(self.n):
+            bits_str = ''.join(map(str, self.__bit_matrix[r]))
+            decimal = int(bits_str, 2)
+            cache.append(str(decimal))
             cache.append(' ')
         cache.pop()
         return ''.join(cache)
@@ -246,4 +240,10 @@ if __name__ == '__main__':
             DiaLanTestCreator(n_, k_, False).write_to_disk(str(id_), save_path)
             id_ += 1
 
-    print(id_)
+    # a = DiaLanTestCreator(1, 1, False)
+    # print(a.input)
+    # print(a.output)
+    # print()
+    # print(a.current_config)
+    # id_ += 1
+    # print(id_)
