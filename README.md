@@ -65,10 +65,10 @@
     
 - [x] [Bài tập tuần 7](https://github.com/18521447/CS112.L12.KHCL/blob/master/bt7/)
 
-  - [ ] [Mức độ giống nhau](https://github.com/18521447/CS112.L12.KHCL/tree/master/bt7/Phan_So)
-    - [ ] [Báo cáo](https://github.com/18521447/CS112.L12.KHCL/tree/master/bt7/Phan_So/Bao_Cao.ipynb)
+  - [x] [Phân số](https://github.com/18521447/CS112.L12.KHCL/tree/master/bt7/Phan_So)
+    - [x] [Báo cáo](https://github.com/18521447/CS112.L12.KHCL/tree/master/bt7/Phan_So/Bao_Cao.ipynb)
     - [x] Code
-  - [ ] [Địa lan](https://github.com/18521447/CS112.L12.KHCL/tree/master/bt7/Xau_Con_Tuong_Duong)
-    - [ ] [Báo cáo](https://github.com/18521447/CS112.L12.KHCL/tree/master/bt7/Xau_Con_Tuong_Duong/Bao_Cao.ipynb)
+  - [x] [Xâu con tương đương](https://github.com/18521447/CS112.L12.KHCL/tree/master/bt7/Xau_Con_Tuong_Duong)
+    - [x] [Báo cáo](https://github.com/18521447/CS112.L12.KHCL/tree/master/bt7/Xau_Con_Tuong_Duong/Bao_Cao.ipynb)
     - [x] Code
 
