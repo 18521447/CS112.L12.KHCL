@@ -1,32 +1,37 @@
+from sys import stdin, stdout
 from collections import Counter
 
-def solve(string):
-    a, b, c, d = map(int, input().split())
-    e = max(b - c, 0)
-    if e > 0:
-        s1 = Counter(string[a-1:b-e-1])
-        stmp = Counter(string[b-e:b])
-        s2 = Counter(string[c+e:d])
-        s1 += stmp
-        s2 += stmp
-    else:
-        s1 = Counter(string[a-1:b])
-        s2 = Counter(string[c-1:d])
-    if s1 == s2:
-        print('YES')
-        return
-    print('NO')
+no = 'NO\n'
+yes = 'YES\n'
 
-s = input().strip()
-q = int(input())
 
-for _ in range(q):
-    solve(s)
+def solve() -> str:
+    start1, end1, start2, end2 = map(lambda x: int(x) - 1, stdin.readline().split())
 
-# e=2
-# 1 5 3 7
-# 1 2 3 4 5 6 7
-# 0 1 2 3 4 5 6
-# 1 2
-# 3 5
-# 6 7
+    if end1 - start1 != end2 - start2:
+        return no
+    elif start1 == start2:
+        return yes
+
+    if start2 < start1:
+        start1, start2 = start2, start1
+        end1, end2 = end2, end1
+
+    if start2 <= end1:
+        overlap = end1 - start2 + 1
+        end1 -= overlap
+        start2 += overlap
+
+    s1 = s[start1: end1 + 1]
+    s2 = s[start2: end2 + 1]
+    if Counter(s1) == Counter(s2):
+        return yes
+    return no
+
+
+if __name__ == '__main__':
+    s = stdin.readline().strip()
+    q = int(stdin.readline().strip())
+
+    for _ in range(q):
+        stdout.writelines(solve())
