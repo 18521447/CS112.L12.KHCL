@@ -1,15 +1,15 @@
-RESULT FOR .\v1.py
+RESULT FOR .\v2.py
 
 TOTAL TEST(s): 14
 
-14 PASS TEST(s)
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 
+0 PASS TEST(s)
+
 
 0 FAILED TEST(s)
 
 
-0 RTE TEST(s)
-
+14 RTE TEST(s)
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 
 
 0 TLE TEST(s)
 
