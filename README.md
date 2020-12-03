@@ -1,4 +1,4 @@
-# CS112.L12.KHCL
+# CS112.L12.KHCL - Nhóm 9
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/18521447/CS112.L12.KHCL/main)
 
