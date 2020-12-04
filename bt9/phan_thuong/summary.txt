@@ -2,11 +2,11 @@ RESULT FOR v1.py
 
 TOTAL TEST(s): 3
 
-1 PASS TEST(s)
-2 
+3 PASS TEST(s)
+1 2 3 
 
-2 FAILED TEST(s)
-1 3 
+0 FAILED TEST(s)
+
 
 0 RTE TEST(s)
 
