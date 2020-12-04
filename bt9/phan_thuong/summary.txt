@@ -1,0 +1,16 @@
+RESULT FOR v1.py
+
+TOTAL TEST(s): 3
+
+1 PASS TEST(s)
+2 
+
+2 FAILED TEST(s)
+1 3 
+
+0 RTE TEST(s)
+
+
+0 TLE TEST(s)
+
+
