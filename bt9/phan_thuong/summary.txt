@@ -1,9 +1,9 @@
 RESULT FOR v1.py
 
-TOTAL TEST(s): 3
+TOTAL TEST(s): 6
 
-3 PASS TEST(s)
-1 2 3 
+6 PASS TEST(s)
+1 2 3 4 5 6 
 
 0 FAILED TEST(s)
 
