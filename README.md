@@ -1,4 +1,4 @@
-# CS112.L12.KHCL
+# CS112.L12.KHCL - Nhóm 9
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/18521447/CS112.L12.KHCL/main)
 
@@ -71,4 +71,21 @@
   - [x] [Xâu con tương đương](https://github.com/18521447/CS112.L12.KHCL/tree/master/bt7/Xau_Con_Tuong_Duong)
     - [x] [Báo cáo](https://github.com/18521447/CS112.L12.KHCL/tree/master/bt7/Xau_Con_Tuong_Duong/Bao_Cao.ipynb)
     - [x] Code
+    
+- [x] [Bài tập tuần 8](https://github.com/18521447/CS112.L12.KHCL/blob/master/bt8/)
 
+  - [x] [Phân số](https://github.com/18521447/CS112.L12.KHCL/tree/master/bt8/so_nguyen_moi)
+    - [x] [Báo cáo](https://github.com/18521447/CS112.L12.KHCL/tree/master/bt8/so_nguyen_moi/Bao_Cao.ipynb)
+    - [x] Code
+  - [x] [Con đường gốm sứ](https://github.com/18521447/CS112.L12.KHCL/tree/master/bt8/con_duong_gom_su)
+    - [x] [Báo cáo](https://github.com/18521447/CS112.L12.KHCL/tree/master/bt8/con_duong_gom_su/Bao_Cao.ipynb)
+    - [x] Code
+
+- [ ] [Bài tập tuần 9]()
+
+  - [ ] [NULL]()
+    - [ ] [Báo cáo]()
+    - [ ] Code
+  - [ ] [NULL]()
+    - [ ] [Báo cáo]()
+    - [ ] Code
