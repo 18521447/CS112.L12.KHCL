@@ -81,11 +81,11 @@
     - [x] [Báo cáo](https://github.com/18521447/CS112.L12.KHCL/tree/master/bt8/con_duong_gom_su/Bao_Cao.ipynb)
     - [x] Code
 
-- [ ] [Bài tập tuần 9]()
+- [ ] [Bài tập tuần 9](https://github.com/18521447/CS112.L12.KHCL/tree/master/bt9)
 
-  - [ ] [NULL]()
-    - [ ] [Báo cáo]()
-    - [ ] Code
+  - [x] [Đèn led](https://github.com/18521447/CS112.L12.KHCL/tree/master/bt9/LED)
+    - [x] [Báo cáo](https://github.com/18521447/CS112.L12.KHCL/tree/master/bt9/LED/Bao_Cao.ipynb)
+    - [x] Code
   - [ ] [NULL]()
     - [ ] [Báo cáo]()
     - [ ] Code
