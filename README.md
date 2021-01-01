@@ -10,7 +10,7 @@
 | Lê Anh Triều        | 18521536 |
 
 # Mục lục
-- [Slide cách tạo bộ test]()
+- [Slide cách tạo bộ test](https://github.com/18521447/CS112.L12.KHCL/tree/master/slide_how_to_test_a_program.pdf)
 - [Kahoot]()
 - [Bài tập tuần](#tiến-độ-bài-tập)
 
