@@ -9,6 +9,11 @@
 | Trần Hoàng Sơn      | 18521351 |
 | Lê Anh Triều        | 18521536 |
 
+# Mục lục
+- [Slide cách tạo bộ test]()
+- [Kahoot]()
+- [Bài tập tuần](tiến-độ-bài-tập)
+
 # Tiến độ bài tập
 - [x] [Bài tập tuần 1](https://github.com/18521447/CS112.L12.KHCL/tree/master/bt1)
 
