@@ -15,6 +15,9 @@
 - [Bài tập tuần](#tiến-độ-bài-tập)
 
 # Tiến độ bài tập
+
+Note: bộ test nằm trong thư mục ```inp``` và ```out``` tương ứng từng bài tập (có một số bài không có bộ test)
+
 - [x] [Bài tập tuần 1](https://github.com/18521447/CS112.L12.KHCL/tree/master/bt1)
 
   - [x] [BOT](https://github.com/18521447/CS112.L12.KHCL/tree/master/bt1)
